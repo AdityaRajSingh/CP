@@ -21,17 +21,20 @@ typedef std::vector<ll> vll;
 //Best O(n)
 //Avg	O(n2)
 //Worst O(n2)
-void bubbleSort(ll a[],ll n)
+
+
+void insertionSort(ll a[],ll n)
 {
 	rep(i,0,n)
 	{
-		rep(j,0,n-i)
+		ll temp=a[i];
+		ll j=i;
+		while(j>0 && temp<a[j-1])
 		{
-			if(a[j]>a[j+1])
-			{
-				swap(a[j],a[j+1]);
-			}
+			a[j]=a[j-1];
+			j--;
 		}
+		a[j]=temp;
 	}
 }
 
@@ -53,7 +56,7 @@ ll a[n];//6 8 1 4 5 3 7 2
 rep(i,0,n)
 cin>>a[i];
 
-bubbleSort(a,n);
+insertionSort(a,n);
 
 rep(i,0,n)
 cout<<a[i]<<" ";

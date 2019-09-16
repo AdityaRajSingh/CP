@@ -18,20 +18,39 @@ typedef std::vector<ll> vll;
 #define ss second
 #define mk make_pair
 
-//Best O(n)
-//Avg	O(n2)
-//Worst O(n2)
-void bubbleSort(ll a[],ll n)
+//Best O(nlogn)
+//Avg	O(nlogn)
+//Worst O(nlogn)
+
+
+ll  heapify(ll a[],ll n, ll i)
 {
-	rep(i,0,n)
+	ll largest=i;
+	ll l=2*i+1;
+	ll r=2*i+2;
+	if(l<n && a[l]>a[largest])
+		largest=l;
+	if(r<n && a[r]>a[largest])
+		largest=r;
+	if(largest!=i)
 	{
-		rep(j,0,n-i)
-		{
-			if(a[j]>a[j+1])
-			{
-				swap(a[j],a[j+1]);
-			}
-		}
+		swap(a[largest],a[i]);
+		heapify(a,n,largest);
+	}
+
+}
+
+
+void heapSort(ll a[], ll n)
+{
+	for(int i=n/2-1;i>=0;i--)
+	{
+		heapify(a,n,i);
+	}
+	for(int i=n-1;i>=0;i--)
+	{
+		swap(a[0],a[i]);
+		heapify(a,i,0);
 	}
 }
 
@@ -52,8 +71,8 @@ cin>>n;//8;
 ll a[n];//6 8 1 4 5 3 7 2
 rep(i,0,n)
 cin>>a[i];
-
-bubbleSort(a,n);
+ll start=0,end=n-1;
+heapSort(a,n);
 
 rep(i,0,n)
 cout<<a[i]<<" ";

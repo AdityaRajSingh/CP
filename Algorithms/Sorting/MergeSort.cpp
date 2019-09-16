@@ -18,20 +18,50 @@ typedef std::vector<ll> vll;
 #define ss second
 #define mk make_pair
 
-//Best O(n)
-//Avg	O(n2)
-//Worst O(n2)
-void bubbleSort(ll a[],ll n)
+//Best O(nlogn)
+//Avg	O(nlogn)
+//Worst O(nlogn)
+
+
+void merge(ll a[],ll start, ll mid, ll end)
 {
-	rep(i,0,n)
+	ll 	temp[end-start+1];
+	ll k=0,l=start,r=mid+1;
+	while(l<=mid && r<=end)
 	{
-		rep(j,0,n-i)
+		if(a[l]<=a[r])
 		{
-			if(a[j]>a[j+1])
-			{
-				swap(a[j],a[j+1]);
-			}
+			temp[k++]=a[l++];
 		}
+		else
+		{
+			temp[k++]=a[r++];
+		}
+	}
+	while(l<=mid)
+	{
+		temp[k++]=a[l++];
+	}
+	while(r<=end)
+	{
+		temp[k++]=a[r++];
+	}
+	for(ll i=start;i<=end;i++)
+	{
+		a[i]=temp[i-start];
+	}
+
+}
+
+
+void mergeSort(ll a[],ll start, ll end)
+{
+	if(start<end)
+	{
+		ll mid=start+(end-start)/2;
+		mergeSort(a,start,mid);
+		mergeSort(a,mid+1,end);
+		merge(a,start,mid,end);
 	}
 }
 
@@ -52,8 +82,8 @@ cin>>n;//8;
 ll a[n];//6 8 1 4 5 3 7 2
 rep(i,0,n)
 cin>>a[i];
-
-bubbleSort(a,n);
+ll start=0,end=n-1;
+mergeSort(a,start,end);
 
 rep(i,0,n)
 cout<<a[i]<<" ";

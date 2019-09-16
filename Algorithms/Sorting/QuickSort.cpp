@@ -18,20 +18,39 @@ typedef std::vector<ll> vll;
 #define ss second
 #define mk make_pair
 
-//Best O(n)
-//Avg	O(n2)
-//Worst O(n2)
-void bubbleSort(ll a[],ll n)
+//Best O(n2)
+//Avg	O(nlogn)
+//Worst O(nlogn)
+
+
+ll  partition(ll a[],ll start, ll end)
 {
-	rep(i,0,n)
+	ll pivot=a[start],i=start+1;;
+	for(ll j=start+1;j<=end;j++)
 	{
-		rep(j,0,n-i)
+		if(a[j]<pivot)
 		{
-			if(a[j]>a[j+1])
-			{
-				swap(a[j],a[j+1]);
-			}
+			swap(a[j],a[i]);
+			i++;
 		}
+	}
+	
+	swap(a[i-1],a[start]);
+	
+	return i-1;
+
+
+}
+
+
+void quickSort(ll a[],ll start, ll end)
+{
+	if(start<end)
+	{
+		ll piv_pos=partition(a,start,end);
+		quickSort(a,start,piv_pos-1);
+		quickSort(a,piv_pos+1,end);
+		
 	}
 }
 
@@ -52,8 +71,8 @@ cin>>n;//8;
 ll a[n];//6 8 1 4 5 3 7 2
 rep(i,0,n)
 cin>>a[i];
-
-bubbleSort(a,n);
+ll start=0,end=n-1;
+quickSort(a,start,end);
 
 rep(i,0,n)
 cout<<a[i]<<" ";
