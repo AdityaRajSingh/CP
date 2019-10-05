@@ -1,11 +1,6 @@
 /******************************************
 * AUTHOR : ADITYA RAJ SINGH *
 ******************************************/
-
-
-
-
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -23,42 +18,6 @@ typedef std::vector<ll> vll;
 #define ss second
 #define mk make_pair
 
-//Best O(nlogn)
-//Avg	O(nlogn)
-//Worst O(nlogn)
-
-
-ll  heapify(ll a[],ll n, ll i)
-{
-	ll largest=i;
-	ll l=2*i+1;
-	ll r=2*i+2;
-	if(l<n && a[l]>a[largest])
-		largest=l;
-	if(r<n && a[r]>a[largest])
-		largest=r;
-	if(largest!=i)
-	{
-		swap(a[largest],a[i]);
-		heapify(a,n,largest);
-	}
-
-}
-
-
-void heapSort(ll a[], ll n)
-{
-	for(int i=n/2-1;i>=0;i--)
-	{
-		heapify(a,n,i);
-	}
-	for(int i=n-1;i>=0;i--)
-	{
-		swap(a[0],a[i]);
-		heapify(a,i,0);
-	}
-}
-
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -67,20 +26,72 @@ int main()
 	#endif
 	fast;
 ////////////////////////////////////////////////////////////////////////////////////////////
+	
+	ll t,n,min;
+	cin>>t;
+	while(t--)
+	{
+		ll a[105],k=1;
+		cin>>n;
+		rep(i,0,n)
+			cin>>a[i];
+		min=a[0]; 
+
+		if(n>=7)
+		{
+			for(ll i=1;i<6;i++)
+			{
+				if(a[i]<min)
+				{
+					k++;
+					min=a[i];
+				}
+			}
+			rep(i,6,n)
+			{
+				if(a[i]<min)
+				{
+					k++;
+					min=a[i];
+				}
+				else
+				{
+					ll smin=INT_MAX;
+					for(ll j=i-1;j>=i-5;j--)
+					{
+						if(a[j]<smin)
+						{
+							smin=a[j];
+						}
+					}
+					if(a[i]<smin)
+					{
+						k++;
+						smin=a[i];
+					}
+					min=smin;
+				}
+			}
+		}
+
+		else
+		{
+			rep(i,1,n)
+			{
+				if(a[i]<min)
+				{
+					k++;
+					min=a[i];
+				}
+			}
+		}
+		
+		cout<<k<<endl;
+	}	
 
 
 
 
-ll n;
-cin>>n;//8;
-ll a[n];//6 8 1 4 5 3 7 2
-rep(i,0,n)
-cin>>a[i];
-ll start=0,end=n-1;
-heapSort(a,n);
-
-rep(i,0,n)
-cout<<a[i]<<" ";
 
 
 
