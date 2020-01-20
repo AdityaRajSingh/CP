@@ -17,46 +17,6 @@ typedef std::vector<ll> vll;
 #define ff first
 #define ss second
 #define mk make_pair
-#define N 100000
-
-int a[100005];
-int b[100005];
-
-int arr[1000000];
-
-void sequence()
-{
-	a[1]=0;a[2]=0;
-	
-	for(int i=3;i<=N;i++)
-	{
-		int k=0;
-
-		for(int j=i-2;j>=1;j--)
-		{
-			if(a[j]==a[i-1])
-			{
-				a[i]=((i-1)-j);
-				k=1;
-				break;
-			}
-		}
-		if(k==0)
-		{
-			a[i]=0;
-		}
-	}
-}
-
-void noOfOccurunces1()
-{
-	for(int i=1;i<=N;i++)
-	{
-		arr[a[i]]++;
-		b[i]=arr[a[i]];
-	}
-}
-
 
 int main()
 {
@@ -67,18 +27,36 @@ int main()
 	fast;
 ////////////////////////////////////////////////////////////////////////////////////////////
 	
-	ll t,n;
-	cin>>t;
-	sequence();
+int d,m;
+cin>>d>>m;
+int d[10];
+rep(i,0,d)
+{
+	cin>>a[i];
+}
 
-	noOfOccurunces1();
-	while(t--)
+switch(m){
+	case 2:
 	{
-		cin>>n;
-		cout<<b[n]<<endl;
-		//cout<<noOfOccurunces(n)<<endl;
 
-	}	
+	}
+	case 20:
+	{
+		
+	}
+	case 25:
+	{
+		
+	}
+	case 2:
+	{
+		
+	}
+	case 2:
+	{
+		
+	}
+}
 
 
 

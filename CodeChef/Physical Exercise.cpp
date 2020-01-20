@@ -17,47 +17,7 @@ typedef std::vector<ll> vll;
 #define ff first
 #define ss second
 #define mk make_pair
-#define N 100000
-
-int a[100005];
-int b[100005];
-
-int arr[1000000];
-
-void sequence()
-{
-	a[1]=0;a[2]=0;
-	
-	for(int i=3;i<=N;i++)
-	{
-		int k=0;
-
-		for(int j=i-2;j>=1;j--)
-		{
-			if(a[j]==a[i-1])
-			{
-				a[i]=((i-1)-j);
-				k=1;
-				break;
-			}
-		}
-		if(k==0)
-		{
-			a[i]=0;
-		}
-	}
-}
-
-void noOfOccurunces1()
-{
-	for(int i=1;i<=N;i++)
-	{
-		arr[a[i]]++;
-		b[i]=arr[a[i]];
-	}
-}
-
-
+#define N 10005
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -67,17 +27,24 @@ int main()
 	fast;
 ////////////////////////////////////////////////////////////////////////////////////////////
 	
-	ll t,n;
+	ll t,n,m,k,x,y;
 	cin>>t;
-	sequence();
-
-	noOfOccurunces1();
 	while(t--)
 	{
-		cin>>n;
-		cout<<b[n]<<endl;
-		//cout<<noOfOccurunces(n)<<endl;
+		cin>>x>>y;
+		ll na[N],ma[N],ka[N];
 
+		cin>>n>>m>>k;
+		rep(i,0,2*n)
+			cin>>na[i];
+
+		rep(i,0,2*m)
+			cin>>ma[i];
+
+		rep(i,0,2*k)
+			cin>>ka[i];
+
+		
 	}	
 
 

@@ -17,46 +17,6 @@ typedef std::vector<ll> vll;
 #define ff first
 #define ss second
 #define mk make_pair
-#define N 100000
-
-int a[100005];
-int b[100005];
-
-int arr[1000000];
-
-void sequence()
-{
-	a[1]=0;a[2]=0;
-	
-	for(int i=3;i<=N;i++)
-	{
-		int k=0;
-
-		for(int j=i-2;j>=1;j--)
-		{
-			if(a[j]==a[i-1])
-			{
-				a[i]=((i-1)-j);
-				k=1;
-				break;
-			}
-		}
-		if(k==0)
-		{
-			a[i]=0;
-		}
-	}
-}
-
-void noOfOccurunces1()
-{
-	for(int i=1;i<=N;i++)
-	{
-		arr[a[i]]++;
-		b[i]=arr[a[i]];
-	}
-}
-
 
 int main()
 {
@@ -67,17 +27,53 @@ int main()
 	fast;
 ////////////////////////////////////////////////////////////////////////////////////////////
 	
-	ll t,n;
+	ll t,a,b,c,l,b1,h;
 	cin>>t;
-	sequence();
-
-	noOfOccurunces1();
 	while(t--)
 	{
-		cin>>n;
-		cout<<b[n]<<endl;
-		//cout<<noOfOccurunces(n)<<endl;
+		cin>>a>>b>>c;
+		cin>>l>>b1>>h;
 
+		ll m1,m2,m3;
+		ll n1,n2,n3;
+
+		m1=min(min(a,b),c);
+		m3=max(max(a,b),c);
+		if(m1==a && m3==b || m1==b && m3==a)
+		m2=c;
+		if(m1==a && m3==c || m1==c && m3==a)
+		m2=b;
+		if(m1==b && m3==c || m1==c && m3==b)
+		m2=a;
+
+		n1=min(min(l,b1),h);
+		n3=max(max(l,b1),h);
+		if(n1==l && n3==b1 || n1==b1 && n3==l)
+		n2=h;
+		if(n1==l && n3==h || n1==h && n3==l)
+		n2=b1;
+		if(n1==b1 && n3==h || n1==h && n3==b1)
+		n2=l;
+
+	cout<<m1<<m2<<m3<<endl;
+	cout<<n1<<n2<<n3<<endl;
+
+		if(a<=l && b<=b1 && c<=h)
+		{
+			
+
+			if(c<=l)
+				cout<<"24"<<endl;
+			else if(c<=b1)
+				cout<<"16"<<endl;
+			else if(c<=h)
+				cout<<"4"<<endl;
+
+		}
+		else
+		{
+			cout<<0<<endl;
+		}
 	}	
 
 

@@ -17,46 +17,6 @@ typedef std::vector<ll> vll;
 #define ff first
 #define ss second
 #define mk make_pair
-#define N 100000
-
-int a[100005];
-int b[100005];
-
-int arr[1000000];
-
-void sequence()
-{
-	a[1]=0;a[2]=0;
-	
-	for(int i=3;i<=N;i++)
-	{
-		int k=0;
-
-		for(int j=i-2;j>=1;j--)
-		{
-			if(a[j]==a[i-1])
-			{
-				a[i]=((i-1)-j);
-				k=1;
-				break;
-			}
-		}
-		if(k==0)
-		{
-			a[i]=0;
-		}
-	}
-}
-
-void noOfOccurunces1()
-{
-	for(int i=1;i<=N;i++)
-	{
-		arr[a[i]]++;
-		b[i]=arr[a[i]];
-	}
-}
-
 
 int main()
 {
@@ -68,19 +28,51 @@ int main()
 ////////////////////////////////////////////////////////////////////////////////////////////
 	
 	ll t,n;
-	cin>>t;
-	sequence();
+rep(t,1,1005)
+{
 
-	noOfOccurunces1();
-	while(t--)
+
+	ll i=1;
+	ll a[11]={0};
+	while(i<=1000)
 	{
-		cin>>n;
-		cout<<b[n]<<endl;
-		//cout<<noOfOccurunces(n)<<endl;
+		ll n=t*i;
+		while(n>0)
+		{
+			a[n%10]++;
+			n=n/10;
+		}
+		i++;
+	}
+	ll k=0;
+	rep(i,0,10)
+	{
+		if(a[i]!=0)
+		{
+			k++;
+		}
 
 	}	
+	if(k==10)
+	{
+		continue;
+	}
+	else
+	{
+		cout<<"no "<<t<<endl;
+		rep(i,0,10)
+		{
+			if(a[i]==0)
+			{
+				cout<<i<<" ";
+			}
 
+		}
+		cout<<endl;
 
+	}
+
+}
 
 
 
