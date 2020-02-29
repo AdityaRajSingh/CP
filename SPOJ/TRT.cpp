@@ -8,12 +8,28 @@ typedef std::vector<ll> vll;
 #define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
 #define endl '\n'
 #define pb push_back
-#define rep(i,a,b) for(ll i=a;i<b;i++)
+#define rep(i,a,b) for(ll i=a;i<=b;i++)
 #define mk make_pair
+#define N 2005
 
-vector<string> v;
+vector<ll> v;
 
+ll dp[N][N];	
+ll ans;
+ll l;
+ll rec(ll i, ll j)
+{
+	if(j==i)
+	{
+		return (l)*v[j];
+	}
+	if(dp[i][j]!=-1)
+	{
+		return dp[i][j];
+	}
 
+	return dp[i][j]=max((l-j+i)*v[i]+rec(i+1,j), (l-j+i)*v[j]+rec(i,j-1));
+}
 
 int main()
 {
@@ -22,46 +38,19 @@ int main()
 	    freopen("/home/aadi/Documents/output.txt", "w", stdout);
 	#endif
 	fast;
-
-	ll t;
+	
+	ll t,x;
 	cin>>t;
-	rep(i,0,t)
+	v.push_back(-1);
+	rep(i,1,t)
 	{
-		char c;
-		cin>>c;
-		string code;
-		cin>>code;
-		v.push_back(code);
-		cout<<c<<" "<<code<<endl;
-
-	}
-	ll q=0;
-
-	rep(i,0,v.size())
-	{
-		rep(j,i,v.size())
-		{
-			string n1=v[i]+v[j];
-			string n2=v[j]+v[i];
-			rep(k,0,v.size())
-			{
-				if(v[k]==n1 || v[k]==n2)
-				{
-					q=1;
-					break;
-				} 
-			}
-		}
-	}
-	if(q==0)
-	{
-		cout<<"unambigous"<<endl;
-	}
-	else
-	{
-		cout<<"ambigous"
-	}
-
+		cin>>x;
+		v.push_back(x);
+	}	
+	l=v.size()-1;
+	memset(dp, -1, sizeof(dp));
+	ll ans=rec(1,v.size()-1);
+	cout<<ans<<endl;
 
 
 

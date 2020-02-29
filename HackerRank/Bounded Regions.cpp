@@ -11,8 +11,6 @@ typedef std::vector<ll> vll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define mk make_pair
 
-vector<string> v;
-
 
 
 int main()
@@ -22,45 +20,41 @@ int main()
 	    freopen("/home/aadi/Documents/output.txt", "w", stdout);
 	#endif
 	fast;
-
-	ll t;
+	
+	ll t,n;
 	cin>>t;
-	rep(i,0,t)
+	while(t--)
 	{
-		char c;
-		cin>>c;
-		string code;
-		cin>>code;
-		v.push_back(code);
-		cout<<c<<" "<<code<<endl;
+		ll ans=0;
 
-	}
-	ll q=0;
+		cin>>n;
+		
 
-	rep(i,0,v.size())
-	{
-		rep(j,i,v.size())
+		rep(i,0,n)
 		{
-			string n1=v[i]+v[j];
-			string n2=v[j]+v[i];
-			rep(k,0,v.size())
+			string s;
+			cin>>s;
+			ll l=s.length();
+			rep(j,0,l)
 			{
-				if(v[k]==n1 || v[k]==n2)
+
+				
+				if(s[j]=='a' ||s[j]=='b' ||s[j]=='d' ||s[j]=='e' ||s[j]=='g' ||s[j]=='o' ||s[j]=='p' ||s[j]=='q' ||s[j]=='A' ||s[j]=='D' ||s[j]=='O' ||s[j]=='P' ||s[j]=='Q' ||s[j]=='R'||s[j]=='0' ||s[j]=='6'||s[j]=='9' ||s[j]=='4')
 				{
-					q=1;
-					break;
-				} 
+					ans=ans+1;
+				}
+				if(s[j]=='B' || s[j]=='8')
+				{
+					ans=ans+2;
+				}
 			}
+			
 		}
-	}
-	if(q==0)
-	{
-		cout<<"unambigous"<<endl;
-	}
-	else
-	{
-		cout<<"ambigous"
-	}
+		
+		cout<<ans<<endl;
+	}	
+
+
 
 
 

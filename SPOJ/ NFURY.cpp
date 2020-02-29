@@ -10,10 +10,12 @@ typedef std::vector<ll> vll;
 #define pb push_back
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define mk make_pair
+#define N 1001
 
-vector<string> v;
+vector<ll> v;
 
-
+ll dp[N];	
+ll l,ans;
 
 int main()
 {
@@ -22,46 +24,47 @@ int main()
 	    freopen("/home/aadi/Documents/output.txt", "w", stdout);
 	#endif
 	fast;
-
-	ll t;
+	
+	ll t,x;
 	cin>>t;
+	
 	rep(i,0,t)
 	{
-		char c;
-		cin>>c;
-		string code;
-		cin>>code;
-		v.push_back(code);
-		cout<<c<<" "<<code<<endl;
+		cin>>x;
+		v.push_back(x);
+	}	
+	l=v.size();
 
+
+	memset(dp, -1, sizeof(dp));
+
+	dp[1]=1;
+	dp[2]=2;
+	dp[3]=3;
+	ll m=INT_MAX;
+	rep(i,4,N)
+	{
+		
+		ll s=sqrt(i);
+		if(s*s==i)
+			dp[i]=1;
+		else
+		{
+			ans=INT_MAX;
+			for(ll j=1;j<=i/2;j++)
+			{
+				if(dp[j]+dp[i-j]<ans)
+					ans=dp[j]+dp[i-j];
+			}
+			dp[i]=ans;	
+		}
+		
 	}
-	ll q=0;
 
 	rep(i,0,v.size())
 	{
-		rep(j,i,v.size())
-		{
-			string n1=v[i]+v[j];
-			string n2=v[j]+v[i];
-			rep(k,0,v.size())
-			{
-				if(v[k]==n1 || v[k]==n2)
-				{
-					q=1;
-					break;
-				} 
-			}
-		}
+		cout<<dp[v[i]]<<endl;
 	}
-	if(q==0)
-	{
-		cout<<"unambigous"<<endl;
-	}
-	else
-	{
-		cout<<"ambigous"
-	}
-
 
 
 
