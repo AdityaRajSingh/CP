@@ -11,7 +11,12 @@ typedef std::vector<ll> vll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define mk make_pair
 
+string s;
 
+int diff(int x, int y)
+{
+
+}
 
 int main()
 {
@@ -21,40 +26,23 @@ int main()
 	#endif
 	fast;
 	
-	ll t;
-	cin>>t;
+	ll n;
+	cin>>n;
 	
+	cin>>s;
+	int a[n];
+	rep(i,0,n)
+	{
+		cin>>a[i];
+	}
 
-	ll a[t]={-1};
-	while(t--)
-		cout<<a[t]<<endl;
-	// while(t--)
-	// {
-	// 	string s;
-	// 	ll k,x;
-	// 	cin>>s;
-	// 	cin>>k>>x;
-	// 	int l=s.length();
-	// 	char f[26]={0};
-	// 	for(int i=0;i<l;i++)
-	// 	{
-	// 		if(f[s[i]-'a']<x )
-	// 		{
-	// 			f[s[i]-'a']++;
-	// 		}
-	// 		else if(f[s[i]-'a']>=x && k>0)
-	// 		{
-	// 			k--;
-	// 		}
-	// 		else 
-	// 		{
-	// 			cout<<i<<endl;
-	// 			break;
-	// 		}
-	// 	}
-	// }	
-
-
+	rep(i,1,n)
+	{
+		if(s[i]!=s[i-1])
+		{
+			
+		}
+	}
 
 
 
