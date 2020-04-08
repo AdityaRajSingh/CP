@@ -12,13 +12,6 @@ typedef std::vector<ll> vll;
 #define mk make_pair
 
 
-int check(char a)
-{
-	if(a>='A' && a<='Z')
-		return 1;
-	return 0;
-}
-
 
 int main()
 {
@@ -28,49 +21,57 @@ int main()
 	#endif
 	fast;
 	
-
-	string a;
-	while(cin>>a)
+	ll t,n,m;
+	cin>>t;
+	while(t--)
 	{
-				
-		int l;
-		l=a.length();
-		int sm=0;
-		int bg=0;
-		int d[l],d1[l];
-		for(int i=0;i<l;i++)
+		cin>>n>>m;
+		if(n%2==1 && m%2==1)
 		{
-			d[i]=check(a[i]);	
-			d1[i]=d[i];	
-		}
-		int ans1=0;
-		for(int i=1;i<l;i++)
-		{
-			if(d[i]==d[i-1])
+			rep(i,0,n)
 			{
-				d[i]=abs(d[i]-1);
-				ans1++;
+				rep(j,0,m)
+				{
+					if((i+j)%2==0)
+						cout<<"B";
+					else
+						cout<<"W";
+				}
+				cout<<endl;
 			}
 		}
-		int ans2=0;
-		for(int i=1;i<l;i++)
-		{
-			if(d1[i]==d1[i-1])
-			{
-				d1[i-1]=abs(d1[i-1]-1);
-				ans2++;
-			}
-		}
-		int diff=min(ans1,ans2);
-		cout<<diff<<endl;
 
+		else
+		{
+			int k=0;
+			rep(i,0,n)
+			{
+				rep(j,0,m)
+				{
+					if((i+j)%2==0)
+						cout<<"B";
+					else
+					{
+						if(k==0)
+						{
+							cout<<"B";
+							k=1;
+						}
+						else
+							cout<<"W";
+					}
+				}
+				cout<<endl;
+			}
+		}
+		
 	}	
+
+
+
+
+
+
 	
 	return 0;
 }
-
-
-// 0
-// 2
-// 5
-// 4
