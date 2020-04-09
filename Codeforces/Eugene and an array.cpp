@@ -23,8 +23,9 @@ int main()
 	
 	ll n;
 	cin>>n;
-	ll a[n],s[n];
+	ll a[n],s[n],s1[n];
 	map<ll,ll>mp;
+	
 	rep(i,0,n)
 	{
 		cin>>a[i];
@@ -38,6 +39,23 @@ int main()
 		mp[s[i]]++;
 
 	}	
+
+
+	ll p=0;
+	s1[n-1]=a[n-1];
+
+	for(ll i=n-2;i>=0;i--)
+	{
+		s1[i]=a[i]+s1[i+1];
+		if(s1[i]==0)
+		{
+			p=i;
+		}
+
+	}	
+
+	
+
 	ll diff=0;
 	for(auto it:mp)
 	{
@@ -51,6 +69,25 @@ int main()
 	ll ans=(n*n+1)/2;
 	ans-=diff;
 	cout<<ans;
+
+
+
+
+	ll n;
+    cin>>n;
+    ll s=0,z=0,l=-1,x;
+    map<ll,ll>mp;
+    mp[0]=0;
+    for(ll i=1;i<=n;i++)
+    {
+        cin>>x;
+        s+=x;
+        if(mp.find(s)!=mp.end())
+            l=max(l,mp[s]);
+        z+=(i-l-1);
+        mp[s]=i;
+    }
+    cout<<z<<"\n";
 
 
 
