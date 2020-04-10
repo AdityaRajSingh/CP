@@ -11,42 +11,7 @@ typedef std::vector<ll> vll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define mk make_pair
 
-ll W,n;
-int w[500],v[500];
 
-
-
-
-
-
-
-maxmin(pair<ll,ll> p1,pair<ll,ll> p2)
-{
-	if()
-}
-
-ll knapsack(ll W,ll n)
-{
-
-	if(W==0 || n==0)
-	{
-		return 0;
-	}
-
-	if(W-w[n-1]<0)
-		return knapsack(W,n-1);
-
-	ll x=v[n-1]+knapsack(W-w[n-1],n-1);
-	ll y=knapsack(W,n-1);
-	if(x==y)
-	{
-
-	}
-	return max(,);
-	
-	
-
-}
 
 int main()
 {
@@ -56,16 +21,62 @@ int main()
 	#endif
 	fast;
 	
-	cin>>W>>n;
-	while(W!=0 && n!=0)
+	ll t,n,m;
+	cin>>t;
+	while(t--)
 	{
+		cin>>n>>m;
+		ll a[n],d,s=0;
+		
+		vll vn;
+		ll ans=0;
+
 		rep(i,0,n)
 		{
-			cin>>w[i]>>v[i];
-		}
-		cout<<" "<<knapsack(W,n)<<endl;
-		cin>>W>>n;
-	}
+			cin>>a[i];
+			d=a[i]-m;
+			//cout<<d<<endl;
+			if(d>=0)
+			{
+				s+=d;
+				ans++;
+			}
+			else
+			{
 
+				vn.pb(d);
+			}
+		}
+		// rep(i,0,vn.size())
+		// cout<<vn[i]<<endl;
+		//cout<<endl;
+		sort(vn.begin(),vn.end(),greater <ll>());
+
+
+			rep(i,0,vn.size())
+			{
+				
+				if(vn[i]+s>=0)
+				{
+					ans++;
+					s+=vn[i];
+				}
+				if(s==0)
+				{
+					break;
+				}
+			}
+
+cout<<ans<<endl;
+
+
+	}	
+
+
+
+
+
+
+	
 	return 0;
 }
