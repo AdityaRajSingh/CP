@@ -26,25 +26,47 @@ int main()
 	while(t--)
 	{
 		cin>>n;
-		ll a[n],b[n],c[n];
+		ll a[n];
 		rep(i,0,n)
-		{
-			cin>>a[i]>>b[i];
-		}
-		c[0]=max(0LL,a[0]-b[n-1]);
-		ll s=c[0];
+		cin>>a[i];
+		sort(a,a+n);
+		vector<ll> ans;
 
-		rep(i,1,n)
+		if(n%2==0)
 		{
-			c[i]=max(0LL,a[i]-b[i-1]);
-			s+=c[i];
+			ll x=n/2;
+			x--;
+			ll y=n/2;
+			while(x>=0 && y<=n-1)
+			{
+
+				ans.pb(a[x]);
+				ans.pb(a[y]);
+				x--;
+				y++;
+			}
 		}
-		ll ans=1e18;
-		rep(i,0,n)
+		else
 		{
-			ans=min(ans,a[i]+s-c[i]);
+			ans.pb(a[n/2]);
+			ll x=n/2;
+			x--;
+			ll y=n/2;
+			y++;
+			while(x>=0 && y<=n-1)
+			{
+				ans.pb(a[x]);
+				ans.pb(a[y]);
+				x--;
+				y++;
+			}
 		}
-		cout<<ans<<endl;
+		rep(i,0,ans.size())
+		{
+			cout<<ans[i]<<" ";
+		}
+		cout<<endl;
+
 	}	
 
 

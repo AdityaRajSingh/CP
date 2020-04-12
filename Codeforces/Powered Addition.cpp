@@ -26,25 +26,60 @@ int main()
 	while(t--)
 	{
 		cin>>n;
-		ll a[n],b[n],c[n];
+		ll a[n],smax[n],diff[n];
 		rep(i,0,n)
 		{
-			cin>>a[i]>>b[i];
+			cin>>a[i];
 		}
-		c[0]=max(0LL,a[0]-b[n-1]);
-		ll s=c[0];
-
+		smax[0]=a[0];
+		diff[0]=0;
 		rep(i,1,n)
 		{
-			c[i]=max(0LL,a[i]-b[i-1]);
-			s+=c[i];
+			smax[i]=max(smax[i-1],a[i]);
+			
+			diff[i]=smax[i]-a[i];
+			//cout<<diff[i]<<" ";
 		}
-		ll ans=1e18;
+		//cout<<endl;
+
+		ll m=INT_MIN;
 		rep(i,0,n)
 		{
-			ans=min(ans,a[i]+s-c[i]);
+			m=max(m,diff[i]);
 		}
+		ll ans=0;
+		//ll s=0;
+		// if(m!=0)
+		// {
+		// 	rep(i,0,10000000)
+		// 	{
+		// 		s+=pow(2,i);
+				
+		// 		if(s>=m)
+		// 		{
+		// 			ans=i+1;
+		// 			break;
+		// 		}
+		// 	}
+		// }
+		if(m!=0)
+		{
+			ans=log2(m+1);
+			ld q=log2(m+1);
+
+			if((ld)ans==q)
+			{
+				ans+=0;
+			}
+			else
+			{
+				ans++;
+			}
+
+		}
+		
 		cout<<ans<<endl;
+
 	}	
 
 

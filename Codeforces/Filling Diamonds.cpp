@@ -26,25 +26,7 @@ int main()
 	while(t--)
 	{
 		cin>>n;
-		ll a[n],b[n],c[n];
-		rep(i,0,n)
-		{
-			cin>>a[i]>>b[i];
-		}
-		c[0]=max(0LL,a[0]-b[n-1]);
-		ll s=c[0];
-
-		rep(i,1,n)
-		{
-			c[i]=max(0LL,a[i]-b[i-1]);
-			s+=c[i];
-		}
-		ll ans=1e18;
-		rep(i,0,n)
-		{
-			ans=min(ans,a[i]+s-c[i]);
-		}
-		cout<<ans<<endl;
+		cout<<n<<endl;
 	}	
 
 
