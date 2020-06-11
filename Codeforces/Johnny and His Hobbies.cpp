@@ -7,16 +7,13 @@ typedef std::vector<ll> vll;
 #define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
 #define endl '\n'
 #define pb push_back
-#define rep(i,a,b) for(ld i=a;i<b;i++)
+#define rep(i,a,b) for(ll i=a;i<b;i++)
 #define rep1(i,a,b) for(ll i=a;i<=b;i++)
 //ll M=1e+9;
 ll power(ll x, ll y, ll M)  
 {   ll res = 1; x = x % M; if (x == 0) return 0;  while (y > 0)  {    if (y & 1)  res = (res*x) % M;    y = y>>1; x = (x*x) % M;  }  return res;  } 
 ll modInverse(ll a, ll M) 
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
-
-
-ll t,h,c; 
 
 int main()
 {
@@ -26,44 +23,37 @@ int main()
 	#endif
 	fast;
 	
-	ll te;
-	cin>>te;
-	ll ans=0;
-	while(te--)
+	ll t,n; 
+	cin>>t;
+	while(t--)
 	{
-		cin>>h>>c>>t;
-		if(t==h)
-			ans=1;
-		else
+		cin>>n;
+		map <ll,ll> mp;
+		ll a[n];
+		rep(i,0,n)
 		{
-			ld e=(c+h)/2;
-			if(t<=e)
-				ans=2;
-			else
+			cin>>a[i];
+			mp[a[i]]++;
+		}
+
+		ll ans=-1;
+		rep1(i,1,1024)
+		{
+			int f=0;
+			rep(j,0,n)
 			{
-				ll k=(h-t)/((2*t)-h-c);
-				ll t1=(k*(h+c)+h)/((2*k)+1);
-				ll t2=((k+1)*(h+c)+h)/((2*k)+3);
-
-
-				ll j1=abs((k*(h+c)+h)-t*(2*k+1))*(2*k+3);
-				ll j2=abs(((k+1)*(h+c)+h)-t*(2*k+3))*(2*k+1);
-				if(j1<=j2)
+				if(mp.find(a[j]^i)==mp.end())
 				{
-					ans=2*k+1;
+					f=1;
+					break;
 				}
-				else
-				{
-					ans=2*k+3;
-				}
-
-				// if(abs(t1-t)<=abs(t2-t))
-				// 	ans=(2*k)+1;
-				// else
-				// 	ans=(2*(k))+3;
+			}
+			if(f==0)
+			{
+				ans=i;
+				break;
 			}
 		}
-		
 		cout<<ans<<endl;
 	}	
 	return 0;

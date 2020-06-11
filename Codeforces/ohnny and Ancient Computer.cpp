@@ -7,7 +7,7 @@ typedef std::vector<ll> vll;
 #define fast ios_base::sync_with_stdio(false),cin.tie(NULL),cout.tie(NULL)
 #define endl '\n'
 #define pb push_back
-#define rep(i,a,b) for(ld i=a;i<b;i++)
+#define rep(i,a,b) for(ll i=a;i<b;i++)
 #define rep1(i,a,b) for(ll i=a;i<=b;i++)
 //ll M=1e+9;
 ll power(ll x, ll y, ll M)  
@@ -16,8 +16,40 @@ ll modInverse(ll a, ll M)
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
 
-ll t,h,c; 
 
+
+ll fun(ll a, ll b)
+{
+	ll ans;
+			if(b%a==0)
+			{
+				ll q=b/a;
+				int k=0;
+				while(q!=1)
+				{
+					if(q%2!=0)
+					{
+						ans=-1;
+						return ans;
+					}
+					else
+					{
+						q/=2;
+						k++;
+					}
+				}
+				ans=k/3;
+				k%=3;
+				ans+=k/2;
+				k%=2;
+				ans+=k/1;
+			}
+			else
+			{
+				ans=-1;
+			}
+			return ans;
+}
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -26,45 +58,27 @@ int main()
 	#endif
 	fast;
 	
-	ll te;
-	cin>>te;
-	ll ans=0;
-	while(te--)
+	ll t,a,b; 
+	cin>>t;
+	while(t--)
 	{
-		cin>>h>>c>>t;
-		if(t==h)
-			ans=1;
+		cin>>a>>b;
+		ll ans=0;
+		if(a==b)
+			ans=0;
+		else if(a<b)
+		{
+			ans=fun(a,b);
+		}
 		else
 		{
-			ld e=(c+h)/2;
-			if(t<=e)
-				ans=2;
-			else
-			{
-				ll k=(h-t)/((2*t)-h-c);
-				ll t1=(k*(h+c)+h)/((2*k)+1);
-				ll t2=((k+1)*(h+c)+h)/((2*k)+3);
-
-
-				ll j1=abs((k*(h+c)+h)-t*(2*k+1))*(2*k+3);
-				ll j2=abs(((k+1)*(h+c)+h)-t*(2*k+3))*(2*k+1);
-				if(j1<=j2)
-				{
-					ans=2*k+1;
-				}
-				else
-				{
-					ans=2*k+3;
-				}
-
-				// if(abs(t1-t)<=abs(t2-t))
-				// 	ans=(2*k)+1;
-				// else
-				// 	ans=(2*(k))+3;
-			}
+			ans=fun(b,a);
 		}
-		
+
 		cout<<ans<<endl;
+
 	}	
 	return 0;
 }
+
+
