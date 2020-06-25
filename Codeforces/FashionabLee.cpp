@@ -22,60 +22,34 @@ int main()
 	    freopen("/home/aadi/Documents/output.txt", "w", stdout);
 	#endif
 	fast;
-
-	ll n;
-	cin>>n;
-	ll k=n;
-	ll c=0;
-
-	ll w=1;
-	ll r=0;
-	ll q=pow(w,10);
-	while(q<n)
+	
+	ll t; 
+	cin>>t;
+	while(t--)
 	{
-		w++;
-		q=pow(w,10);
-	}
-
-	if(q!=n)
-	{
-		w=w-1;
-		q=pow(w,10);
+		ll n;
+		cin>>n;
+		ll k1=(n-2)*180;
+		ll k=k1/n;
 		
-		while(q<n)
+		cout<<k*n<<" "<<(n-2)*180<<" ";
+		ll d=180-k;
+
+		if(n==3 && k*n!=(n-2)*180)
+			cout<<"NO"<<endl;
+		else
 		{
-			q=q/w;
-			q*=(w+1);
-			r++;
-		}
-	}
-
-	//cout<<w<<" "<<r<<endl;
-	// c=log2(k);
-	// if(pow(2,c)!=n)
-	// 	c++;
-
-	// cout<<c<<endl;
-
-	string dans="";
-	// ll q=c/10;
-	// ll r=c%10;
-	
-	string cp="codeforces";
-	rep(j,0,10)
-	{
-		rep1(i,1,w)
-		{
-			dans+=cp[j];
-		}
-		if(j<r)
-		{
-			dans+=cp[j];
-		}
-	}
-	
-	cout<<dans<<endl;
-	
-
+			if((k-90)%d==0)
+			{
+				cout<<"YES"<<endl;
+			}
+			else
+			{
+				cout<<"NO"<<endl;
+			}
+		}	
+		
+		
+	}	
 	return 0;
 }

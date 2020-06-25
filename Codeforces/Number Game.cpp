@@ -15,6 +15,27 @@ ll power(ll x, ll y, ll M)
 ll modInverse(ll a, ll M) 
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
+
+bool isPrime(ll n) 
+{ 
+    // Corner cases 
+    if (n <= 1) 
+        return false; 
+    if (n <= 3) 
+        return true; 
+  
+    // This is checked so that we can skip 
+    // middle five numbers in below loop 
+    if (n % 2 == 0 || n % 3 == 0) 
+        return false; 
+  
+    for (ll i = 5; i * i <= n; i = i + 6) 
+        if (n % i == 0 || n % (i + 2) == 0) 
+            return false; 
+  
+    return true; 
+} 
+
 void sieveOfEratosthenes(ll N, ll s[]) 
 { 
     
@@ -90,6 +111,7 @@ ll generatePrimeFactors(ll N)
 
     if(k2>1)
     {
+    	//cout<<"Hello";
     	ans=1;
     }
     else 
@@ -138,11 +160,39 @@ int main()
 		{
 
 			ll l=n;
-			if(pow(log2(l),2)==l)
+			//cout<<log2(l)<<endl;
+			//cout<<pow(2,(int)log2(l))<<endl;
+			ll b=log2(l);
+
+			ll c=pow(2,(int)b);
+
+			if(c==l)
 				ans=2;
 			else
 			{
-				ans=generatePrimeFactors(n);
+				ll x=0;
+				while(n%2==0)
+				{
+					n=n/2;
+					x++;
+				}
+
+				if(x>1)
+					ans=1;
+				else
+				{
+					//cout<<"Hello";
+					ll q=l/pow(2,x);
+					if(isPrime(q))
+					{
+						ans=2;
+					}
+					else
+					{
+						ans=1;
+					}
+				}
+				//ans=generatePrimeFactors(n);
 			}
 			
 		}
