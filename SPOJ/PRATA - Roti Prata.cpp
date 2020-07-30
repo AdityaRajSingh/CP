@@ -9,59 +9,56 @@ typedef std::vector<ll> vll;
 #define pb push_back
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define rep1(i,a,b) for(ll i=a;i<=b;i++)
-//ll M=1e+9;
-ll power(ll x, ll y, ll M)  
-{   ll res = 1; x = x % M; if (x == 0) return 0;  while (y > 0)  {    if (y & 1)  res = (res*x) % M;    y = y>>1; x = (x*x) % M;  }  return res;  } 
-ll modInverse(ll a, ll M) 
-{   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
-bool f(ll a[], ll mid, ll n, ll c)
+bool f(ll a[], ll mid, ll n, ll p)
 {
-	ll d=1;
-	ll prev=0;
-	rep(i,1,n)
+	ll tp=0;
+	rep(i,0,n)
 	{
-		if(a[i]-a[prev]>=mid)
+		ll x=a[i],t=0;
+		ll k=1;
+		while(t+(x*k)<=mid)
 		{
-			d++;
-			prev=i;
-			if(d>=c)
-			{
-				return true;
-			}
+			t+=(x*k);
+			k++;
 		}
+		tp+=(k-1);
+		if(tp>=p)
+		{
+			return true;
+		}
+
 	}
 	return false;
 }
 
 
-ll bsDistance(ll a[], ll n, ll c)
+ll bsTime(ll a[], ll n, ll p)
 {
-	ll m=-1;
+	ll m=INT_MAX;
 	rep(i,0,n)
 	{
-		m=max(m,a[i]);
+		m=min(m,a[i]);
 	}
-	ll l=1;
-	ll r=m;
-	ll ans=-1;
+	ll l=0;
+	ll r=(p*(p+1))/2;
+	r=r*m;
+	ll ans=l;
 	while(l<=r)
 	{
 		ll mid=l+(r-l)/2;
-		if(f(a,mid,n,c))
+		if(f(a,mid,n,p))
 		{
 			ans=mid;
-			l=mid+1;
+			r=mid-1;
 		}
 		else
 		{
-			r=mid-1;
+			l=mid+1;
 		}
 	}
 	return ans;
 }
-
-
 
 int main()
 {
@@ -71,19 +68,19 @@ int main()
 	#endif
 	fast;
 	
-	ll t,n,c; 
+	ll t,n,p; 
 	cin>>t;
 	while(t--)
 	{
-		cin>>n>>c;
+		cin>>p;
+		cin>>n;
 		ll a[n];
 		rep(i,0,n)
 			cin>>a[i];
 
-		sort(a,a+n);
-		cout<<bsDistance(a,n,c)<<endl;
-		
-		
+		cout<<bsTime(a,n,p)<<endl;
+
+
 	}	
 	return 0;
 }

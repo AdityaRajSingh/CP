@@ -15,54 +15,6 @@ ll power(ll x, ll y, ll M)
 ll modInverse(ll a, ll M) 
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
-bool f(ll a[], ll mid, ll n, ll c)
-{
-	ll d=1;
-	ll prev=0;
-	rep(i,1,n)
-	{
-		if(a[i]-a[prev]>=mid)
-		{
-			d++;
-			prev=i;
-			if(d>=c)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-
-ll bsDistance(ll a[], ll n, ll c)
-{
-	ll m=-1;
-	rep(i,0,n)
-	{
-		m=max(m,a[i]);
-	}
-	ll l=1;
-	ll r=m;
-	ll ans=-1;
-	while(l<=r)
-	{
-		ll mid=l+(r-l)/2;
-		if(f(a,mid,n,c))
-		{
-			ans=mid;
-			l=mid+1;
-		}
-		else
-		{
-			r=mid-1;
-		}
-	}
-	return ans;
-}
-
-
-
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -71,19 +23,42 @@ int main()
 	#endif
 	fast;
 	
-	ll t,n,c; 
+	ll t,n; 
 	cin>>t;
 	while(t--)
 	{
-		cin>>n>>c;
-		ll a[n];
-		rep(i,0,n)
+		cin>>n;
+		ll a[2*n];
+		map<ll,ll> mp;
+		stack<ll> stac;
+		rep(i,0,2*n)
+		{
 			cin>>a[i];
+		}
+		rep(i,0,2*n)
+		{
+			if(mp.find(a[i])==mp.end())
+			{
+				stac.push(a[i]);
+				mp[a[i]]++;
+			}
+		}
+		vector<ll> ans;
+		while(!stac.empty())
+		{
+			ans.pb(stac.top());
+			stac.pop();
+		}
+		for(ll i=ans.size()-1;i>=0;i--)
+		{
+			cout<<ans[i]<<" ";
+		}
+		cout<<endl;
 
-		sort(a,a+n);
-		cout<<bsDistance(a,n,c)<<endl;
-		
-		
+
+
+
+
 	}	
 	return 0;
 }

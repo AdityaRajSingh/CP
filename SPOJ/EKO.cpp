@@ -15,17 +15,45 @@ ll n,m;
 ll a[1000005];
 
 
-ll f(ll x)
+bool f(ll a[], ll mid, ll n, ll c)
 {
-	ll ans=0;
+	ll s=0;
+	
 	rep(i,0,n)
 	{
-		if(x<a[i])
+		if(a[i]>=mid)
+			s+=(a[i]-mid);
+	}
+	if(s>=c)
+		return true;
+
+	return false;
+}
+
+
+ll bsHeight(ll a[], ll n, ll c)
+{
+	ll m=-1;
+	rep(i,0,n)
+	{
+		m=max(m,a[i]);
+	}
+	ll l=0;
+	ll r=m;
+	ll ans=l;
+	while(l<=r)
+	{
+		ll mid=l+(r-l)/2;
+		if(f(a,mid,n,c))
 		{
-			ans+=a[i]-x;
+			ans=mid;
+			l=mid+1;
+		}
+		else
+		{
+			r=mid-1;
 		}
 	}
-	
 	return ans;
 }
 
@@ -38,30 +66,13 @@ int main()
 	fast;
 	
 	cin>>n>>m;
-	ll end=-1;
+	
 	rep(i,0,n)
 	{
 		cin>>a[i];
-		if(a[i]>end)
-			end=a[i];
+	}
+	cout<<bsHeight(a,n,m);
 
-	}
-	ll ans=0;
-	ll beg=0,mid;
-	
-	while(beg<=end)
-	{
-		mid=beg+(end-beg)/2;
-		if(f(mid)>=m)
-		{
-			ans=mid;
-			beg=mid+1;
-		}
-		if(f(mid)<m)
-		{
-			end=mid-1;
-		}
-	}
-	cout<<ans;
+
 	return 0;
 }

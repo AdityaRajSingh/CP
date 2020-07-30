@@ -15,54 +15,6 @@ ll power(ll x, ll y, ll M)
 ll modInverse(ll a, ll M) 
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
-bool f(ll a[], ll mid, ll n, ll c)
-{
-	ll d=1;
-	ll prev=0;
-	rep(i,1,n)
-	{
-		if(a[i]-a[prev]>=mid)
-		{
-			d++;
-			prev=i;
-			if(d>=c)
-			{
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-
-ll bsDistance(ll a[], ll n, ll c)
-{
-	ll m=-1;
-	rep(i,0,n)
-	{
-		m=max(m,a[i]);
-	}
-	ll l=1;
-	ll r=m;
-	ll ans=-1;
-	while(l<=r)
-	{
-		ll mid=l+(r-l)/2;
-		if(f(a,mid,n,c))
-		{
-			ans=mid;
-			l=mid+1;
-		}
-		else
-		{
-			r=mid-1;
-		}
-	}
-	return ans;
-}
-
-
-
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -71,19 +23,38 @@ int main()
 	#endif
 	fast;
 	
-	ll t,n,c; 
-	cin>>t;
-	while(t--)
-	{
-		cin>>n>>c;
-		ll a[n];
-		rep(i,0,n)
-			cin>>a[i];
+	 int t;
+    cin>>t;
+    
+    
+    while(t--)
+    {
+        int n;
+        cin>>n;
+        ll a[n+1];
+        rep1(i,1,n)
+        {
+            cin>>a[i];
+        }
+        
+		rep1(i,1,n)
+        {
+            ll l=a[i];
+            rep(j,1,i)
+            {
+                if(i%j==0)
+                {
+                    l+=a[j];
+                }
+            }
+            cout<<l<<" ";
+        }
+        cout<<endl;
+        
+    }
 
-		sort(a,a+n);
-		cout<<bsDistance(a,n,c)<<endl;
-		
-		
-	}	
+
+
+
 	return 0;
 }

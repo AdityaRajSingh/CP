@@ -20,38 +20,46 @@ typedef std::vector<ll> vll;
 
 vector<int> g[100005];
 int vis[100005];
-int level[100005];
 
 void bfs(int x,int n)
 {
+	memset(vis,0,sizeof(vis));
+	
 	queue<int> q;
 	q.push(1);
-	level[1]=1;
-	vis[1]=1;
+
+	int k=1;
+	ll ans;
+
 	while(!q.empty())
 	{
-		int f=q.front();
-		q.pop();
-
-		for(int i=0;i<g[f].size();i++)
-		{
-			int a=g[f][i];
-			if(vis[a]==0)
+			int l=q.size();
+			if(k==x)
 			{
-				q.push(a);
-				vis[a]=1;
-				level[a]=level[f]+1;
+				cout<<l;
 			}
-		}
+			for(int i=0;i<l;i++)
+			{
+				int f=q.front();
+				vis[f]=1;
+				//cout<<f<<" ";
+				q.pop();
 
-	}
-	int k=0;
-	for(int i=1;i<=n;i++)
-	{
-		if(level[i]==x)
+				for(int j=0;j<g[f].size();j++)
+				{
+					if(!vis[g[f][j]])
+					{
+						vis[g[f][j]]=1;
+						q.push(g[f][j]);
+					}
+				}
+			}
 			k++;
+			
+			//cout<<endl;
 	}
-cout<<k;
+	// cout<<ans;
+	
 }
 
 int main()
