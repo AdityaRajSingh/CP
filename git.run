@@ -1,0 +1,4 @@
+git add .
+curtime=`date`
+git commit -m "Code @ $curtime"
+git push origin master

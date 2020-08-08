@@ -15,7 +15,6 @@ ll power(ll x, ll y, ll M)
 ll modInverse(ll a, ll M) 
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
-
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -29,34 +28,60 @@ int main()
 	while(t--)
 	{
 		cin>>n;
-		ll a[n];
-		map<ll,ll> mp;
-		ll s=0;
-		//ll mi=INT_MAX;
+		string s;
+		vll ans(n);
+		cin>>s;
+		ll k=1;
+		stack <ll> z,o; 
+		ll l=1;
 		rep(i,0,n)
 		{
-			cin>>a[i];
-			mp[a[i]]++;
-			s+=a[i];
-			//mi=min(a[i],mi);
-		}
-		//sort(a,a+n);
-
-
-		ll ans=0;
-		rep1(i,2,100)
-		{
-			ll count=0;
-			rep1(j,0,i/2)
+			if(s[i]=='0')
 			{
-				if(j==(i-j))
-					count+=(mp[j]/2);
+				if(o.size()==0)
+				{
+					z.push(k);
+					ans[i]=k;
+					k++;
+				}
 				else
-					count+=min(mp[j],mp[i-j]);
+				{
+					ll f=o.top();
+					o.pop();
+					ans[i]=f;
+					z.push(f);
+
+				}
+				
 			}
-			ans=max(ans,count);
+			else
+			{
+				if(z.size()==0)
+				{
+					o.push(k);
+					ans[i]=k;
+					k++;
+				}
+				else
+				{
+					ll f=z.top();
+					z.pop();
+					ans[i]=f;
+					o.push(f);
+				}
+				
+			}
+			l=max(ans[i],l);
 		}
-		cout<<ans<<endl;
+		cout<<l<<endl;
+		rep(i,0,n)
+		{
+			cout<<ans[i]<<" ";
+		}
+		cout<<endl;
+
+
+
 	}	
 	return 0;
 }
