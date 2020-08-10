@@ -15,24 +15,6 @@ ll power(ll x, ll y, ll M)
 ll modInverse(ll a, ll M) 
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
-
-
-ll factorial(ll n)
-{
-	ll m=1000000007;
-	ll fact = 1;
-	ll d=1;
-	while(n > 1)
-	{ 
-	    fact= (fact*n)%m; 
-	    n -= 1;
-	    d=(d*2)%m;
-	}
-	ll ans=fact-d;
-	return (ans+m)%m;
-}
-
-
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -41,13 +23,17 @@ int main()
 	#endif
 	fast;
 	
+	ll t,n,m; 
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m;
+		cout<<"YES"<<endl;
+		
 
-	ll n;
-	cin>>n;
-	cout<<factorial(n);
-	
-    return 0;
+
+
+
+	}	
+	return 0;
 }
-
-
-  
