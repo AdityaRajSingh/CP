@@ -9,11 +9,6 @@ typedef std::vector<ll> vll;
 #define pb push_back
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define rep1(i,a,b) for(ll i=a;i<=b;i++)
-//ll M=1e+9;
-ll power(ll x, ll y, ll M)  
-{   ll res = 1; x = x % M; if (x == 0) return 0;  while (y > 0)  {    if (y & 1)  res = (res*x) % M;    y = y>>1; x = (x*x) % M;  }  return res;  } 
-ll modInverse(ll a, ll M) 
-{   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
 int main()
 {
@@ -23,14 +18,43 @@ int main()
 	#endif
 	fast;
 	
-	ll t,n,m; 
-	cin>>t;
-	while(t--)
+	ll n,m,x,y;
+	cin>>n>>m>>x>>y;
+
+	ll grid[n][m];
+
+	memset(grid,0,sizeof(grid));
+	x--;
+	y--;
+	
+	grid[x][y]=1;
+	cout<<x+1<<" "<<y+1<<endl;
+	grid[x][0]=1;
+	cout<<x+1<<" "<<1<<endl;
+	grid[0][0]=1;
+	cout<<1<<" "<<1<<endl;
+
+
+	rep(j,0,m)
 	{
-		cin>>n>>m;
-		cout<<"YES"<<endl;
-
-
-	}	
+		rep(i,0,n)
+		{
+			if(grid[i][j]==0)
+			{
+				grid[i][j]=1;
+				cout<<i+1<<" "<<j+1<<endl;
+			}
+		}
+		j++;
+		for(ll i=n-1;i>=0;i--)
+		{
+			if(grid[i][j]==0)
+			{
+				grid[i][j]=1;
+				cout<<i+1<<" "<<j+1<<endl;
+			}
+		}
+		
+	}
 	return 0;
 }
