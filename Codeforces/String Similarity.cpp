@@ -23,62 +23,19 @@ int main()
 	#endif
 	fast;
 	
-	ll t; 
+	ll t,n; 
 	cin>>t;
 	while(t--)
 	{
-		ll l;
-		cin>>l;
-		string str;
-		cin>>str;
-		
-		vll a,s(l+1);
-
-		ll ans=0;
-		rep(i,0,l)
+		cin>>n;
+		string s;
+		cin>>s;
+		string ans="";
+		for(int i=0;i<(2*n)-1;i+=2)
 		{
-			a.pb(str[i]-48);
-			if(a[i]==1)
-				ans++;
-		}
-		s[0]=0;
-		
-		
-		rep1(i,1,l)
-		{
-			s[i]=s[i-1]+a[i-1];
-
-		}
-
-		// rep(i,0,l)
-		// {
-		// 	cout<<a[i]<<" ";
-		// }
-		// cout<<endl;
-
-		// rep1(i,0,l)
-		// {
-		// 	cout<<s[i]<<" ";
-		// }
-		// cout<<endl;
-		
-		rep1(i,2,21)
-		{
-			int k=0;
-			rep1(j,i,l)
-			{
-				if((s[j]-s[j-i])==i)
-				{
-					k++;
-					ans++;
-				}
-			}
-			//cout<<"No of "<<i<<" = "<<k<<endl;
+			ans+=s[i];
 		}
 		cout<<ans<<endl;
-
-
-
 
 
 

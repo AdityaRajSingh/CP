@@ -23,62 +23,46 @@ int main()
 	#endif
 	fast;
 	
-	ll t; 
+	ll t,x; 
 	cin>>t;
 	while(t--)
 	{
-		ll l;
-		cin>>l;
-		string str;
-		cin>>str;
-		
-		vll a,s(l+1);
-
-		ll ans=0;
-		rep(i,0,l)
+		string s,sd="";
+		cin>>s;
+		ll l=s.length();
+		cin>>x;
+		for(int i=0;i<l;i++)
 		{
-			a.pb(str[i]-48);
-			if(a[i]==1)
-				ans++;
-		}
-		s[0]=0;
-		
-		
-		rep1(i,1,l)
-		{
-			s[i]=s[i-1]+a[i-1];
-
-		}
-
-		// rep(i,0,l)
-		// {
-		// 	cout<<a[i]<<" ";
-		// }
-		// cout<<endl;
-
-		// rep1(i,0,l)
-		// {
-		// 	cout<<s[i]<<" ";
-		// }
-		// cout<<endl;
-		
-		rep1(i,2,21)
-		{
-			int k=0;
-			rep1(j,i,l)
+			string v="0";
+			if(i-x>=0 && s[i-x]=='1')
 			{
-				if((s[j]-s[j-i])==i)
-				{
-					k++;
-					ans++;
-				}
+				v="1";
 			}
-			//cout<<"No of "<<i<<" = "<<k<<endl;
+			if((i+x)<l && s[i+x]=='1')
+			{
+				v="1";
+			}
+			sd+=v;
 		}
-		cout<<ans<<endl;
 
-
-
+		string sd2="";
+		for(int i=0;i<l;i++)
+		{
+			string v="0";
+			if(i-x>=0 && sd[i-x]=='1')
+			{
+				v="1";
+			}
+			if((i+x)<l && sd[i+x]=='1')
+			{
+				v="1";
+			}
+			sd2+=v;
+		}
+		if(sd2.compare(s)==0)
+			cout<<sd<<endl;
+		else
+			cout<<-1<<endl;
 
 
 
