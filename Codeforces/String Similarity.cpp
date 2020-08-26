@@ -23,23 +23,24 @@ int main()
 	#endif
 	fast;
 	
-	ll t,n; 
-	cin>>t;
-	while(t--)
-	{
-		cin>>n;
-		string s;
-		cin>>s;
-		string ans="";
-		for(int i=0;i<(2*n)-1;i+=2)
-		{
-			ans+=s[i];
-		}
-		cout<<ans<<endl;
+	// ll t,n; 
+	// cin>>t;
+	// while(t--)
+	// {
+	// 	cin>>n;
+	// 	string s;
+	// 	cin>>s;
+	// 	string ans="";
+	// 	for(int i=0;i<(2*n)-1;i+=2)
+	// 	{
+	// 		ans+=s[i];
+	// 	}
+	// 	cout<<ans<<endl;
 
 
 
 
-	}	
+	// }	
+	cout<<-3%2<<endl;
 	return 0;
 }
