@@ -9,26 +9,29 @@ typedef std::vector<ll> vll;
 #define endl '\n'
 #define pb push_back
 #define rep(i,a,b) for(ll i=a;i<b;i++)
+#define rep1(i,a,b) for(ll i=a;i<=b;i++)
 #define mk make_pair
 
 ll n,m;
 vll a(1005,0);
-vll s(1005,1);
+
 void initialize()
 {
-		rep(i,0,n)
+	rep1(i,1,n)
 	{
-		a[i]=i;
-		s[i]=1;
+		a[i]=-1;
 	}
 }
 ll root(ll i)
 {
-	while(a[i]!=i)
+	// cout<<"root of "<<i;
+	while(a[i]>0)
 	{
-		a[i]=a[a[i]];
+		if(a[a[i]]>0)
+			a[i]=a[a[i]];
 		i=a[i];
 	}
+	// cout<<" is "<<i<<endl;
 	return i;
 
 }
@@ -36,23 +39,24 @@ void dsu(ll x, ll y)
 {
 	ll rx=root(x);
 	ll ry=root(y);
-	if(s[rx]>=s[ry])
+	//cout<<rx<<" "<<ry<<endl;
+	if(abs(a[rx])>=abs(a[ry]))
 	{
-		a[ry]=a[rx];
-		s[rx]+=s[ry];
-		s[ry]=0;
+		int temp=abs(a[ry]);
+		a[rx]-=temp;
+		a[ry]=rx;
 	}
 	else
 	{
-		a[rx]=a[ry];
-		s[ry]+=s[rx];
-		s[rx]=0;
+		int temp=abs(a[rx]);
+		a[ry]-=temp;
+		a[rx]=ry;
 	}
 }
 
 int main()
 {
-	#ifndef ONLINE_JUDGE
+#ifndef ONLINE_JUDGE
 		freopen("/home/aadi/Documents/input.txt", "r", stdin);
 	    freopen("/home/aadi/Documents/output.txt", "w", stdout);
 	#endif
@@ -61,27 +65,31 @@ int main()
 	ll x,y;
 
 	cin>>n>>m;
-	a.resize(n);
-	s.resize(n,1);
+	a.resize(n+1);
 	initialize();
 	while(m--)
 	{
 		cin>>x>>y;
 		dsu(x,y);
-		vector<ll> v;
-		rep(i,0,n)
-		{	
-			if(s[i]!=0)
-				v.pb(s[i]);
-		}
-		sort(v.begin(), v.end());
-		rep(i,0,v.size())
-		{
-			cout<<v[i]<<" ";
-		}
-		cout<<endl;
+		// vector<ll> v;
+		// rep(i,0,n)
+		// {	
+		// 	if(a[i]<0)
+		// 		v.pb(abs(a[i]));
+		// }
+		// sort(v.begin(), v.end());
+		// rep(i,0,v.size())
+		// {
+		// 	cout<<v[i]<<" ";
+		// }
+		// cout<<endl;
 
-	}	
+	}
+	cout<<root(4)<<endl;	
+	cout<<root(6)<<endl;	
+	cout<<root(8)<<endl;	
+	rep1(i,1,n)
+	cout<<a[i]<<" ";
 
 	
 
