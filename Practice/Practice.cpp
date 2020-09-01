@@ -10,28 +10,25 @@ typedef std::vector<ll> vll;
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define rep1(i,a,b) for(ll i=a;i<=b;i++)
 //ll M=1e+9;
-int square(int n)
+unordered_map<string,int>dp;
+int recurse(int d,int t,int n,int oldd,int oldt,string s)
 {
-	if(n==0) return 0; 
 
-	if (n < 0) n = -n; 
+    if(d<=0)
+      return 0;
+    if(t<=0)
+      return 0;
+    //cout<<s<<"\n";
+     if(n==0&&d>0&&t>0)
+      return 1;
+    string h=to_string(d)+" "+to_string(t)+" "+to_string(n);
 
-	int x=n>>1;
-	
-	if(n&1)
-		return ((square(x)<<2) + (x<<2) + 1);
-	else
-		return ( square(x)<<2 );
+    if(dp.find(h)!=dp.end())
+     return dp[h];
+    int ans=0;
+    ans+=recurse(d-1,oldt,n-1,oldd,oldt,s+'0')+recurse(oldd,t-1,n-1,oldd,oldt,s+'1');
+    return dp[h]=ans;
 }
-
-void isPowerOf2(int n)
-{
-	if((n&(n-1))==0 && n!=0)
-			cout<<"Yes Power of 2"<<endl;
-		else
-			cout<<"No"<<endl;
-}
-
 
 
 int main()
@@ -42,14 +39,9 @@ int main()
 	#endif
 	fast;
 	
-	ll t,n; 
-	cin>>t;
-	while(t--)
-	{
-		cin>>n;
-		cout<<square(n)<<endl;
-		
-
-	}	
+	int n,d,t;
+    cin>>n>>d>>t;
+    dp.clear();
+    cout<<recurse(d,t,n,d,t,"")<<"\n";
 	return 0;
 }

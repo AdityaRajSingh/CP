@@ -14,43 +14,46 @@ typedef std::vector<ll> vll;
 const int MAX = 1e4 + 5;
 typedef pair<long long, int> PII;
 bool marked[MAX];
+bool dist[MAX];
 vector <PII> adj[MAX];
 
-long long Dijkstra(int x)
+void Dijkstra(int x)
 {
-    //priority_q<cost, 
+    for(int i=0;i<MAX;i++)
+        dist[i]=INT_MAX;
+    dist[x]=0;
+    //priority_q<cost>
     priority_queue<PII, vector<PII>, greater<PII> > Q;
     int y;
 
-
-    long long minimumCost = 0;
-   
     Q.push(make_pair(0, x));
-
-
 
     while(!Q.empty())
     {
         // Select the edge with minimum weight
         PII p = Q.top();
         Q.pop();
-        x = p.second;
 
-        // Checking for cycle
+        x = p.second;
+        weight = p.first;
+
+        // If already Visited
         if(marked[x] == true)
             continue;
 
 
-        minimumCost += p.first;
+        
         marked[x] = true;
-        for(int i = 0;i < adj[x].size();++i)
+        for(int i = 0;i < adj[x].size();i++)
         {
-            y = adj[x][i].second;
-            if(marked[y] == false)
-                Q.push(adj[x][i]);
+            if(dist[x]+adj[x][i].first < dist[adj[x][i].second])
+            {
+                dist[adj[x][i].second]=dist[x]+adj[x][i].first;
+                Q.push(dist[adj[x][i].second],dist[adj[x][i].second]);
+            }
         }
     }
-    return minimumCost;
+    
 }
 int main()
 {
@@ -70,8 +73,8 @@ int main()
         adj[y].push_back(make_pair(weight, x));
     }
     // Selecting 1 as the starting node
-    minimumCost = Dijkstra(1);
-    cout << minimumCost << endl;
+    Dijkstra(1);
+    
 }
 
 
