@@ -43,7 +43,7 @@ int main()
 		if(c>k)
 		{
 			vector<pair<ll,ll> >  v;
-			ll i=0,k=n-1;
+			ll i=0,k1=n-1;
 			while(a[i]=='0' && i<n)
 			{
 				i++;
@@ -55,19 +55,19 @@ int main()
 
 			if(i!=n)
 			{
-				while(a[k]=='0' && k>=0)
+				while(a[k1]=='0' && k1>=0)
 				{
-					k--;
+					k1--;
 				}
-				if(k!=n-1)
+				if(k1!=n-1)
 				{
-					v.push_back(make_pair(n-k-1,-1));
+					v.push_back(make_pair(n-k1-1,-1));
 				}
 			}
 
 			
 
-			rep1(j,i,k)
+			rep1(j,i,k1)
 			{
 				ll d=j;
 				while(a[j]=='0' && j<n)
@@ -76,23 +76,29 @@ int main()
 				}
 				if(j!=d)
 				{
-					v.push_back(make_pair(i,-2));
+					v.push_back(make_pair(j-d,-2));
 				}
+				
 			}
 
 			sort(v.begin(), v.end());
-			rep(i,0,v.size())
-			{
-				cout<<v[i].first<<" "<<v[i].second<<endl;
-			}
-			// ll ans=0;
-			// i=0;
-			// while(c<=k && i<v.size())
+			// rep(i,0,v.size())
 			// {
-			// 	ans+=v[i].first;
-			// 	c+=v[i].second;
+			// 	cout<<v[i].first<<" "<<v[i].second<<endl;
 			// }
-			// cout<<ans<<endl;
+			// cout<<endl;
+
+			ll ans=0;
+			i=0;
+			//cout<<c<<" "<<k<<endl;
+			while(c>k && i<v.size())
+			{
+				//cout<<"Hello"<<endl;
+				ans+=v[i].first;
+				c+=v[i].second;
+				i++;
+			}
+			cout<<ans<<endl;
 
 		}
 		else
