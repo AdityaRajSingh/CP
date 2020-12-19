@@ -9,6 +9,7 @@ typedef std::vector<ll> vll;
 #define pb push_back
 #define rep(i,a,b) for(ll i=a;i<b;i++)
 #define rep1(i,a,b) for(ll i=a;i<=b;i++)
+
 //ll M=1e+9;
 
 int main()
@@ -35,6 +36,7 @@ int main()
 	
 		rep(i,0,s.length())
 		{
+			char rough;
 			char x=s[i];
 			if(x==' ')
 				continue;
@@ -49,17 +51,17 @@ int main()
 		}
 		cin>>sn;
 
-
+		ll k=-1;
 		rep(i,0,n)
 		{
-			cout<<a[i]<<" ";
+			if(s[i]>sn)
+			{
+				k=i;
+			}
 		}
 		cout<<endl;
 		
-
-
-
-
 	}	
 	return 0;
+
 }
