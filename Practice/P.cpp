@@ -15,6 +15,44 @@ ll power(ll x, ll y, ll M)
 ll modInverse(ll a, ll M) 
 {   ll g = __gcd(a, M); if (g != 1) return -1; else return(power(a, M-2, M)); } 
 
+int fun(string s)
+{
+	int len=s.length();
+	int l=0,r=0,u=0,d=0,ans=0;
+	for(int i=0;i<len;i++)
+	{
+		if(s[i]=='L')
+			l++;
+		if(s[i]=='R')
+			r++;
+		if(s[i]=='U')
+			u++;
+		if(s[i]=='D')
+			d++;
+	}
+
+	if(l>r)
+	{
+		ans+=2*r;
+	}
+	else
+	{
+		ans+=2*l;
+	}
+
+	if(u>d)
+	{
+		ans+=2*d;
+	}
+	else
+	{
+		ans+=2*u;
+	}
+
+	return r;
+}
+
+
 int main()
 {
 	#ifndef ONLINE_JUDGE
@@ -23,15 +61,12 @@ int main()
 	#endif
 	fast;
 	
-	int i=0;
-	for(i=0;i=5;i++)
-	{
-		cout<<i<<endl;
-	}
+	string s;
+	cin>>s;
+	cout<<s<<endl;
+	cout<<fun(s);
 
 
-
-
-		
+	
 	return 0;
 }
